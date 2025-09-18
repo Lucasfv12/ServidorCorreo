@@ -4,6 +4,8 @@ CLIENTE DE CORREO ELECTRÓNICO
 
 Comenzamos creando cada una de las clases para lograr entender cómo relacionarlas. Antes realizamos el diagrama en Visual Paradigm. Lo pensamos como mensajería interna, por ahora con los usuarios creados sin tener que realizar un logueo.
 
+Se implementan las cuatro clases principales: Servidor, Mensaje, Usuario y Carpetas. La clase Servidor nos permite almacenar los usuario registrados y poder mostrarlos por consola; //En un futuro se podría validar el destinatario//. La clase Mensaje contiene los datos que representan a un mensaje como lo son el remitente, el destinatario, el asunto y el contenido. Cada mensaje muestra un objeto con sus atributos. La clase Carpeta utiliza una lista para almacenar los mensajes y otro metodo para mostrarlos. Y por último la clase Usuario, gestiona las carpetas y permite enviar y recibir mensajes.
+
 Evaluamos qué debía contener la clase de Servidor_Correo y si debería tener una función dónde se pregunte si hay correo recorriendo la lista. Más adelante se podría hacer discriminar a qué usuario le corresponde cada correo.
 
 Por ahora habrá solo dos bandejas: enviados y recibidos.
