@@ -45,3 +45,27 @@ self.carpetas = {
 "entrada": Carpeta("Bandeja de entrada"),
 "enviados": Carpeta("Bandeja de enviados")
 }
+
+EJECUCIÓN DEL PROGRAMA
+
+Primero creamos el servidor, luego creamos los usuarios y por último los agregamos al servidor.
+
+servidor = Servidor()
+
+lucas = Usuario("Lucas", "lucasvergara.f@gmail.com")
+carla = Usuario("Carla", "carlabrizuela@gmail.com")
+
+servidor.agregar_usuario(lucas)
+servidor.agregar_usuario(carla)
+
+Podemos mostrar los usuarios agregados con:
+
+servidor.mostrar_usuarios()
+
+A continuación enviamos el mensaje:
+
+lucas.enviar_mensaje(carla, "Saludo", "Hola, Carla, ¿cómo estás?")
+
+Mostramos la bandeja de entrada de Carla para confirmar que el correo llegó:
+
+carla.mostrar_carpeta("entrada")
