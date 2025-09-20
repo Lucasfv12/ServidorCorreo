@@ -69,3 +69,7 @@ lucas.enviar_mensaje(carla, "Saludo", "Hola, Carla, ¿cómo estás?")
 Mostramos la bandeja de entrada de Carla para confirmar que el correo llegó:
 
 carla.mostrar_carpeta("entrada")
+
+También podemos mostrar la bandeja de enviados de Lucas con:
+
+lucas.mostrar_carpeta("enviados")

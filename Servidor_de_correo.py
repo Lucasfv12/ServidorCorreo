@@ -105,7 +105,7 @@ print("Carla le responde el mensaje")
 print()
 lucas.mostrar_carpeta("entrada")
 
-#*Verificamos la bandeja de enviados*
+#*Podemos verificamos la bandeja de enviados*
 print()
 lucas.mostrar_carpeta("enviados")
 
