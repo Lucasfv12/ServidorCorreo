@@ -13,7 +13,7 @@ Por ahora habrá solo dos bandejas: enviados y recibidos.
 La clase Servidor_Correo solo tendrá la función para mostrar los usuarios que contiene y guardar a los usuarios que se van registrando:
 
 class Servidor:
-def **init**(self):
+def _init_(self):
 self.usuarios = []
 
     def agregar_usuario(self, usuario):
@@ -33,7 +33,7 @@ Creamos la clase carpeta para que cada mensaje vaya a una lista vacía, pero en 
 Cambiamos las listas vacías de la clase usuario:
 
 class Usuario:
-def **init**(self, nombre, correo):
+def _init_(self, nombre, correo):
 self.nombre = nombre
 self.correo = correo
 self.bandeja_entrada = []
