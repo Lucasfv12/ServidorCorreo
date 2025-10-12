@@ -1,0 +1,11 @@
+# Ignorar carpetas generadas automáticamente por Python
+__pycache__/
+*.pyc
+
+# Ignorar configuraciones temporales del editor
+.vscode/
+.idea/
+
+# Ignorar archivos del sistema
+.DS_Store
+Thumbs.db

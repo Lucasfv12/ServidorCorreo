@@ -1,6 +1,13 @@
-CLIENTE DE CORREO ELECTRÓNICO
+ESTRUCTURAS DE DATOS
+Profesor: Leonardo Bianco.
+
+Proyecto Final: CLIENTE DE CORREO ELECTRÓNICO
 
 1ER ENTREGA
+
+INTEGRANTES:
+*Brizuela, Carla.
+*Vergara, Lucas.
 
 Comenzamos creando cada una de las clases para lograr entender cómo relacionarlas. Antes realizamos el diagrama en Visual Paradigm. Lo pensamos como mensajería interna, por ahora con los usuarios creados sin tener que realizar un logueo.
 
