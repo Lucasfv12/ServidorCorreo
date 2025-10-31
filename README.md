@@ -80,3 +80,10 @@ carla.mostrar_carpeta("entrada")
 También podemos mostrar la bandeja de enviados de Lucas con:
 
 lucas.mostrar_carpeta("enviados")
+
+3RA ENTREGA.
+
+1ra modificación: En el archivo carpeta.py se modifica el método buscar_mensaje debido a que el mismo solo
+realizaba la busqueda de mensajes a partir de remitente y el asunto. Entendemos que la busqueda en ese caso un poco acotada y agregamos la busqueda por contenido y asunto. También comprendemos que el hecho de busqueda por remitente es obvio, debido a que el usuario no realiza el filtro de busqueda buscando mensaje de sí mismo porque la casilla de correo le corresponde a él mismo, pero en nuestro caso podemos permitirnos esa busqueda ya que disponemos de dos usuarios en el servidor.
+
+2da modicación: Agregamos el método mover_mensaje. De esta manera, el usuario primero debe buscar el mensaje con el metodo de busquedad de mensaje y luego utilizar el metodo mover_mensaje que recorre recursivamente las carpetas y subcarpetas, lo elimina de la carpeta donde se encuentra y lo agrega en la carpeta destino.

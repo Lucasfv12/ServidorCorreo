@@ -30,12 +30,17 @@ class Carpeta:
         for sub in self._subcarpetas:
             sub.mostrar_mensajes()
 
-    def buscar_mensajes(self, remitente=None, asunto=None):
+    def buscar_mensajes(self, remitente=None, asunto=None, contenido=None, destinatario=None ):
         encontrados = []
         for m in self._mensajes:
             if (remitente is None or m.remitente == remitente) and \
-           (asunto is None or m.asunto == asunto):
+            (asunto is None or m.asunto == asunto) \
+                (contenido is None or m.contenido == contenido) \
+                (destinatario is None or m.destinario == destinatario):
                 encontrados.append(m)
         for sub in self._subcarpetas:
             encontrados.extend(sub.buscar_mensajes(remitente, asunto))
         return encontrados
+    
+    def mover_mensaje(self, mensaje, carpeta_destino):
+        pass
