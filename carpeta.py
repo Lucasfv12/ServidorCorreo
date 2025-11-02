@@ -43,4 +43,17 @@ class Carpeta:
         return encontrados
     
     def mover_mensaje(self, mensaje, carpeta_destino):
-        pass
+        if mensaje in self._mensajes:
+            self._mensajes.remove(mensaje)
+            carpeta_destino.agregar_mensaje(mensaje)
+            return True
+        for sub in self._subcarpetas:
+            if sub.mover_mensaje(mensaje, carpeta_destino):
+                return True
+        return False
+    
+    def mostrar_arbol(self, nivel=0):
+        print("   " * nivel + f"- {self.nombre}")
+        for sub in self._subcarpetas:
+            sub.mostrar_arbol(nivel + 1)
+        

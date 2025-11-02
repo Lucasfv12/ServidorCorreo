@@ -81,9 +81,20 @@ También podemos mostrar la bandeja de enviados de Lucas con:
 
 lucas.mostrar_carpeta("enviados")
 
-3RA ENTREGA.
 
-1ra modificación: En el archivo carpeta.py se modifica el método buscar_mensaje debido a que el mismo solo
-realizaba la busqueda de mensajes a partir de remitente y el asunto. Entendemos que la busqueda en ese caso un poco acotada y agregamos la busqueda por contenido y asunto. También comprendemos que el hecho de busqueda por remitente es obvio, debido a que el usuario no realiza el filtro de busqueda buscando mensaje de sí mismo porque la casilla de correo le corresponde a él mismo, pero en nuestro caso podemos permitirnos esa busqueda ya que disponemos de dos usuarios en el servidor.
 
-2da modicación: Agregamos el método mover_mensaje. De esta manera, el usuario primero debe buscar el mensaje con el metodo de busquedad de mensaje y luego utilizar el metodo mover_mensaje que recorre recursivamente las carpetas y subcarpetas, lo elimina de la carpeta donde se encuentra y lo agrega en la carpeta destino.
+***************************************
+*     3RA ENTREGA - REORGANIZACIÓN    *
+***************************************
+
+1) Agregamos una interfaz de Linea de comando para reorganizar el archivo main.py. El nuevo MAIN se gestiona a través de la función menu_servidor, respondiendo a la necesidad de construir un sistema más usable mediante la ejecución de comandos que aseguren que todos los componentes operen según lo esperado. La sección anterior contaba con una serie de comandos ejecutados secuencialmente sin necesidad de la interacción con el usuario. 
+
+2) En el archivo carpeta.py se modifica el método buscar_mensaje debido a que el mismo solo realizaba la busqueda de mensajes a partir de remitente y el asunto. Entendemos que la busqueda en ese caso un poco acotada y agregamos la busqueda por contenido y asunto. También comprendemos que el hecho de busqueda por remitente es obvio, debido a que el usuario no realiza el filtro de busqueda buscando mensaje de sí mismo porque la casilla de correo le corresponde a él mismo, pero en nuestro caso podemos permitirnos esa busqueda ya que disponemos de dos usuarios en el servidor. 
+
+3) Agregamos el método mover_mensaje. De esta manera, el usuario primero debe buscar el mensaje con el metodo de busquedad de mensaje y luego utilizar el metodo mover_mensaje que recorre recursivamente las carpetas y subcarpetas, lo elimina de la carpeta donde se encuentra y lo agrega en la carpeta destino.
+
+4) Al agregar el método mover_mensaje y querer mover un mensaje de una carpeta a otra, por ejemplo moverlo desde la bandeja de entrada a spam, nos arrojaba el error: INDEXerror: list index out of range. Debido a que la carpeta spam no existía. De esta manera probamos como solución: si el usuario escribe una carpeta destino, y la carpeta existe, la movemos, si no existe, el CLI pregunta si quiere crearla, respondiendo por sí o por no. Luego se mueve el mensaje a la carpeta creada.
+
+5) De la misma manera el método mover_mensaje y la implementación del CLI nos trajo otros inconvenientes. Uno de ellos es que no podíamos aprovechar en su totalidad la recursividad. No estabamos pudiendo navegar entre subcarpetas y no teniamos el acceso a la carpetas del usuario en el menú. Entonces agregamos la opción "Mostrar todas las carpetas del usuario". No sabemos con exactitud si es la mejor decisión. Es verdad que una interfaz gráfica sería de mayor utilidad en este caso que la línea de comandos, pero al mismo tiempo todavía más compleja. Pensamos también en la opción "Buscar carpeta", pero el usuario debería recordar las carpetas y el nombre de cada una de ellas y no nos parecía operativo. 
+
+6) Solucionamos el error que arrojaba al buscar los mensajes por medio del CLI, como antes la utilización de los métodos era manual, no arrojaba el error si no indicábamos el filtro del mensaje que estábamos buscando. Al agregarle el CLI el error aparece ya que no teníamos una excepción en el caso de que la el destinatario no existe, el remitente o alguno de los datos solicitados. De esta manera, ahora se verifica primero si la carpeta existe antes de llamar a buscar_mensaje y se evita el error.

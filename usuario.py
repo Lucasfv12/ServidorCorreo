@@ -26,3 +26,9 @@ class Usuario:
             self._carpetas[tipo].mostrar_mensajes()
         else:
             print(f"La carpeta {tipo} no existe")
+    
+    def mostrar_carpetas(self):
+        print(f"\nCarpetas de {self._nombre}:")
+        for nombre, carpeta in self._carpetas.items():
+            print(f"- {nombre} ({len(carpeta._mensajes)} mensajes)")
+ 
