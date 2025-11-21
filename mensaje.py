@@ -1,9 +1,10 @@
 class Mensaje:
-    def __init__(self, remitente, destinatario, asunto, contenido):
+    def __init__(self, remitente, destinatario, asunto, contenido, urgente):
         self._remitente = remitente
         self._destinatario = destinatario
         self._asunto = asunto
         self._contenido = contenido
+        self._urgente = urgente
     
     @property
     def remitente(self):
@@ -20,9 +21,14 @@ class Mensaje:
     @property
     def contenido(self):
         return self._contenido
+    
+    @property
+
+    def urgente(self):
+        return self._urgente
 
     def mostrar(self):
-        print(f"De: {self.remitente}")
+        print(f"{'[URGENTE] ' if self.urgente else ''}De: {self.remitente}")
         print(f"Para: {self.destinatario}")
         print(f"Asunto: {self.asunto}")
         print(f"Contenido: {self.contenido}")

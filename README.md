@@ -1,23 +1,32 @@
-ESTRUCTURAS DE DATOS
-Profesor: Leonardo Bianco.
+****************************************************************
+*                                                              *
+*               ESTRUCTURAS DE DATOS                           *
+*              Profesor: Leonardo Bianco.                      *
+*                                                              *
+*       Proyecto Final: CLIENTE DE CORREO ELECTRÓNICO          * 
+*                                                              *
+*                                                              *
+*                                                              *
+*                       GRUPO N°11                             *
+*                                                              *
+*             INTEGRANTES:                                     *
+*                          Brizuela, Carla.                    *
+*                   Email: brizuelac2401@gmail.com             *
+*                                                              *
+*                          Vergara, Lucas                      *
+*                   Email: lucasvergara.f@gmail.com            *
+*                                                              *
+****************************************************************
 
-Proyecto Final: CLIENTE DE CORREO ELECTRÓNICO
+1ER PASO: Comenzamos creando cada una de las clases para lograr entender cómo relacionarlas. Antes realizamos el diagrama en Visual Paradigm. Lo pensamos como mensajería interna, por ahora con los usuarios creados sin tener que realizar un logueo.
 
-1ER ENTREGA
+2DO PASO: Se implementan las cuatro clases principales: Servidor, Mensaje, Usuario y Carpetas. La clase Servidor nos permite almacenar los usuario registrados y poder mostrarlos por consola; //En un futuro se podría validar el destinatario//. La clase Mensaje contiene los datos que representan a un mensaje como lo son el remitente, el destinatario, el asunto y el contenido. Cada mensaje muestra un objeto con sus atributos. La clase Carpeta utiliza una lista para almacenar los mensajes y otro metodo para mostrarlos. Y por último la clase Usuario, gestiona las carpetas y permite enviar y recibir mensajes.
 
-INTEGRANTES:
-*Brizuela, Carla.
-*Vergara, Lucas.
+3ER PASO: Evaluamos qué debía contener la clase de Servidor_Correo y si debería tener una función dónde se pregunte si hay correo recorriendo la lista. Más adelante se podría hacer discriminar a qué usuario le corresponde cada correo.
 
-Comenzamos creando cada una de las clases para lograr entender cómo relacionarlas. Antes realizamos el diagrama en Visual Paradigm. Lo pensamos como mensajería interna, por ahora con los usuarios creados sin tener que realizar un logueo.
+Por el momento solo habrá dos bandejas: enviados y recibidos.
 
-Se implementan las cuatro clases principales: Servidor, Mensaje, Usuario y Carpetas. La clase Servidor nos permite almacenar los usuario registrados y poder mostrarlos por consola; //En un futuro se podría validar el destinatario//. La clase Mensaje contiene los datos que representan a un mensaje como lo son el remitente, el destinatario, el asunto y el contenido. Cada mensaje muestra un objeto con sus atributos. La clase Carpeta utiliza una lista para almacenar los mensajes y otro metodo para mostrarlos. Y por último la clase Usuario, gestiona las carpetas y permite enviar y recibir mensajes.
-
-Evaluamos qué debía contener la clase de Servidor_Correo y si debería tener una función dónde se pregunte si hay correo recorriendo la lista. Más adelante se podría hacer discriminar a qué usuario le corresponde cada correo.
-
-Por ahora habrá solo dos bandejas: enviados y recibidos.
-
-La clase Servidor_Correo solo tendrá la función para mostrar los usuarios que contiene y guardar a los usuarios que se van registrando:
+La clase Servidor solo tendrá la función para mostrar los usuarios que contiene y guardar a los usuarios que se van registrando:
 
 class Servidor:
 def _init_(self):
@@ -52,6 +61,8 @@ self.carpetas = {
 "entrada": Carpeta("Bandeja de entrada"),
 "enviados": Carpeta("Bandeja de enviados")
 }
+
+Este cambio lo realizamos en base a una organización mucho más clara, debido a que si luego queríamos agregar más carpetas, como puede ser Spam, papelera, borradores, etc., tendríamos que crear nuevos atributos cada vez. El diccionario nos da la posibilidad de tener todo en un solo lugar. Una sola estructura organizada por nombre.
 
 EJECUCIÓN DEL PROGRAMA
 
@@ -98,3 +109,50 @@ lucas.mostrar_carpeta("enviados")
 5) De la misma manera el método mover_mensaje y la implementación del CLI nos trajo otros inconvenientes. Uno de ellos es que no podíamos aprovechar en su totalidad la recursividad. No estabamos pudiendo navegar entre subcarpetas y no teniamos el acceso a la carpetas del usuario en el menú. Entonces agregamos la opción "Mostrar todas las carpetas del usuario". No sabemos con exactitud si es la mejor decisión. Es verdad que una interfaz gráfica sería de mayor utilidad en este caso que la línea de comandos, pero al mismo tiempo todavía más compleja. Pensamos también en la opción "Buscar carpeta", pero el usuario debería recordar las carpetas y el nombre de cada una de ellas y no nos parecía operativo. 
 
 6) Solucionamos el error que arrojaba al buscar los mensajes por medio del CLI, como antes la utilización de los métodos era manual, no arrojaba el error si no indicábamos el filtro del mensaje que estábamos buscando. Al agregarle el CLI el error aparece ya que no teníamos una excepción en el caso de que la el destinatario no existe, el remitente o alguno de los datos solicitados. De esta manera, ahora se verifica primero si la carpeta existe antes de llamar a buscar_mensaje y se evita el error.
+
+**************************************************
+*     4TA ENTREGA - PRUEBAS Y ACTUALIZACIONES    *
+**************************************************
+
+1) Se agregó __eq__ en la clase Usuario para que dos usuarios se consideren iguales cuando tienen el mismo email. Esto nos permite detectar en el caso de que haya duplicados y poder comparar los usuarios correctamente.
+
+2) Se agregó una cola de prioridades para gestionar los mensajes urgentes. Ahora los mensaje pueden marcarse como "urgentes" cuando se está por realizar el envío. Estos se almacenan en una estructura heapq y se muestran antes que los mensajes "comunes".
+
+3) Luego de analizarlo, tomamos la decisión de no utilizar heapq para manejar la prioridad de los mensajes urgentes. Se decide reemplazar esta implementación por una cola de prioridad, basada en nodos y listas enlazadas. La modificación se realizó con el objetivo de implimentar el manejo de mensajes urgentes naturalmente sin depender de estructuras predefinidas de las cuales no conocemos del todo su funcionamiento. De esta manera adquirimos un comportamiento más claro y modificable, permitiendo manipular directamente los nodos al mover o reorganizar los mensaje, por ejemplo, al cambiar mensajes de carpetas respetando su urgencia.
+
+De todas maneras dejamos a continuación en el caso que en un futuro se quiera implementar el uso de heapq utilizando dependencias.
+
+ #Mostrar los urgentes primeros
+        print("\n MENSAJES URGENTES ")
+        temp = []
+        while self._urgentes:
+            _, m = heapq.heappop(self._urgentes)
+            m.mostrar()
+            temp.append((0, m))
+        #Devolverlos a la cola
+        for item in temp:
+            heapq.heappush(self._urgentes, item)
+
+ #BUSCA EN LOS MENSAJES URGENTES:
+        for _, m in self._urgentes:
+           if (remitente is None or m.remitente == remitente) and \
+              (asunto is None or m.asunto == asunto) and \
+              (contenido is None or m.contenido == contenido) and \
+              (destinatario is None or m.destinatario == destinatario):
+               encontrados.append(m)
+            
+#MOVER MENSAJES URGENTES
+        for i, (prioridad, m) in enumerate(self._urgentes):
+            if m == mensaje:
+                #QUITA EL ELEMENTO DE LA COLA
+                self._urgentes.pop(i)
+                #REORDENA LA COLA
+                heapq.heapify(self._urgentes)
+                #RESPETA LA URGENCIA
+                carpeta_destino.agregar_mensaje(mensaje)
+
+def agregar_mensaje(self, mensaje):
+        if mensaje.urgente:
+            heapq.heappush(self._urgentes, (0, mensaje))
+        else:
+            self._mensajes.append(mensaje)

@@ -1,3 +1,4 @@
+from usuario import Usuario
 from mensaje import Mensaje
 
 class Servidor:
@@ -19,7 +20,8 @@ class Servidor:
             raise ValueError(f"El remitente '{remitente.nombre}' no está registrado en el servidor.")
         if destinatario not in self._usuarios:
             raise ValueError(f"El destinatario '{destinatario.nombre}' no está registrado en el servidor.")
-        mensaje = Mensaje(remitente.correo, destinatario.correo, asunto, contenido)
+        urgente = input("Es un mensaje urgente? (s/n): ").strip().lower() == "s"
+        mensaje = Mensaje(remitente.correo, destinatario.correo, asunto, contenido, urgente)
         remitente.carpetas["enviados"].agregar_mensaje(mensaje)
         self._recibir_mensaje(destinatario, mensaje)
     

@@ -9,13 +9,16 @@ class Usuario:
             "enviados": Carpeta("Bandeja de enviados")
         }
 
+    def __eq__(self, other):
+        return isinstance(other, Usuario) and self.correo == other.correo
+
     @property
     def nombre(self):
         return self._nombre
     
     @property
     def correo(self):
-        return self._nombre
+        return self._correo
     
     @property
     def carpetas(self):

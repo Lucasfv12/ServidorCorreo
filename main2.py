@@ -85,7 +85,7 @@ def menu_servidor(servidor):
                 continue
 
             # Mostrar mensajes disponibles para elegir
-            if not carpeta_o._mensajes:
+            if not carpeta_o.obtener_mensajes():
                 print("No hay mensajes en esta carpeta.")
                 continue
 
@@ -121,8 +121,8 @@ def menu_servidor(servidor):
 
         # ----- MOSTRAR CARPETAS -----
         elif opcion == "4" or opcion == "5":
-            usuario_nombre = input("Ingrese el nombre del usuario: ").strip()
-            usuario = next((u for u in servidor._usuarios if u.nombre == usuario_nombre), None)
+            usuario_nombre = input("Ingrese el nombre del usuario: ").strip().lower().upper()
+            usuario = next((u for u in servidor._usuarios if u.nombre.lower().upper() == usuario_nombre), None)
 
             if not usuario:
                 print("Usuario no encontrado.")
@@ -133,8 +133,8 @@ def menu_servidor(servidor):
 
         # ----- MOSTRAR TODAS LAS CARPETAS -----
         elif opcion == "6":
-            usuario_nombre = input("Ingrese el nombre del usuario: ").strip()
-            usuario = next((u for u in servidor._usuarios if u.nombre == usuario_nombre), None)
+            usuario_nombre = input("Ingrese el nombre del usuario: ").strip().upper().lower()
+            usuario = next((u for u in servidor._usuarios if u.nombre.upper().lower() == usuario_nombre), None)
 
             if not usuario:
                 print("Usuario no encontrado.")
