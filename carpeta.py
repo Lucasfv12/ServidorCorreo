@@ -1,6 +1,5 @@
 from colaDePrioridad import ColaDePrioridad
 
-
 class Carpeta:
     def __init__(self, nombre):
         self._nombre = nombre

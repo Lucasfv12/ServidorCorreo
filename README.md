@@ -156,3 +156,5 @@ def agregar_mensaje(self, mensaje):
             heapq.heappush(self._urgentes, (0, mensaje))
         else:
             self._mensajes.append(mensaje)
+
+4) La cola de prioridad que agregamos nos permite y nos garantiza que los mensajes urgentes se procesen antes que los normales, lo que no se implementa es una estructura que nos permita extender el sistema para asignar distintos niveles de urgencia. Se podría evaluar en un futuro. En este caso, los urgentes van a la cola de prioridad y los normales van a una lista común.
